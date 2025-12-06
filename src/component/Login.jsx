@@ -19,7 +19,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${process.env.BACKEND_URI}/login`, formData)
+      .post(`${process.env.NEXT_PUBLIC_BACKEND_URI}/login`, formData)
       .then((response) => {
         if (response.data.message === "Login successful") {
           navigate("/profile");
@@ -71,4 +71,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
