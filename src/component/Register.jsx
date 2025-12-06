@@ -19,7 +19,7 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`process.env.BACKEND_URI/register`, formData)
+    axios.post(`${process.env.BACKEND_URI}/register`, formData)
       .then(response => {
         if (response.data.message) {
           navigate("/");
@@ -48,5 +48,6 @@ const Register = () => {
     </div>
   )
 }
+
 
 export default Register
