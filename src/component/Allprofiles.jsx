@@ -6,7 +6,7 @@ const Allprofiles = () => {
 
   useEffect(() => {
     axios
-      .get(`process.env.BACKEND_URI/profile`)
+      .get(`${process.env.BACKEND_URI}/profile`)
       .then((response) => {
         setData([...data, ...response.data]);
       })
@@ -44,3 +44,4 @@ const Allprofiles = () => {
 };
 
 export default Allprofiles;
+
