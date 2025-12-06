@@ -16,24 +16,28 @@ const Login = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post(`${process.env.NEXT_PUBLIC_BACKEND_URI}/login`, formData)
-      .then((response) => {
-        if (response.data.message === "Login successful") {
-          navigate("/profile");
-        }
-        console.log("Login successful:", response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error logging in!", error);
-      });
-    setFormData({
-      email: "",
-      password: "",
-    });
+
+    const API = process.env.NEXT_PUBLIC_BACKEND_URI; // ✅ FIXED
+
+    console.log("BACKEND URL:", API); // 👉 Add this once to debug
+
+    try {
+      const response = await axios.post(`${API}/login`, formData);
+
+      if (response.data.message === "Login successful") {
+        navigate("/profile");
+      }
+
+      console.log("Login successful:", response.data);
+    } catch (error) {
+      console.error("There was an error logging in!", error);
+    }
+
+    setFormData({ email: "", password: "" });
   };
+
   return (
     <div className="w-full flex flex-col justify-center items-center">
       <h2 className="text-2xl font-semibold mb-4">Login</h2>
@@ -56,13 +60,14 @@ const Login = () => {
         <button type="submit" className="bg-blue-500 text-white p-2 rounded">
           Login
         </button>
+
         <p className="text-sm text-gray-400">
           Don't have an account?{" "}
           <button
             onClick={() => navigate("/register")}
             className="text-blue-500"
           >
-            Register{" "}
+            Register
           </button>
         </p>
       </form>
@@ -71,5 +76,3 @@ const Login = () => {
 };
 
 export default Login;
-
-
